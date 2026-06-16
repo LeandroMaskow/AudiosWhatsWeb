@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Áudios Whats — Os melhores áudios engraçados do Brasil</title>
+<meta name="description" content="Os melhores áudios engraçados para mandar no WhatsApp. Ouça, baixe e compartilhe grátis!">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#f0f2f5;color:#111;min-height:100vh}
+
+.header{background:#128C7E;padding:0 20px;display:flex;align-items:center;gap:12px;height:56px;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;cursor:pointer}
+.logo-icon{width:36px;height:36px;background:rgba(255,255,255,0.15);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.logo h1{color:#fff;font-size:17px;font-weight:700}
+.header-spacer{flex:1}
+.header-search{background:rgba(255,255,255,0.15);border:none;border-radius:20px;padding:7px 14px;color:#fff;font-size:13px;width:220px;outline:none}
+.header-search::placeholder{color:rgba(255,255,255,0.6)}
+.header-nav{display:flex;gap:4px}
+.nav-btn{padding:6px 12px;border-radius:16px;font-size:12px;font-weight:500;cursor:pointer;border:none;background:rgba(255,255,255,0.15);color:#fff;transition:background 0.15s;white-space:nowrap}
+.nav-btn:hover{background:rgba(255,255,255,0.25)}
+.nav-btn.active{background:rgba(255,255,255,0.3)}
+
+.ad-wrap{background:#fff;border-bottom:1px solid #e0e0e0;padding:8px 0;text-align:center}
+.ad-label{font-size:9px;color:#bbb;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:3px}
+.ad-slot{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#f9f9f9;border:1px dashed #ddd;border-radius:6px;width:728px;max-width:95%;height:90px;color:#bbb;font-size:13px}
+
+.page{max-width:1100px;margin:0 auto;padding:16px}
+
+.app-bar{background:#fff;border:1.5px solid #e0e0e0;border-radius:14px;padding:14px 18px;display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.app-bar-text{flex:1}
+.app-bar-text strong{font-size:14px;color:#222;display:block;margin-bottom:2px}
+.app-bar-text span{font-size:12px;color:#888}
+.store-btns{display:flex;gap:8px}
+.store-btn{padding:8px 14px;border-radius:8px;border:1.5px solid #ddd;font-size:12px;font-weight:600;cursor:pointer;background:#fff;color:#222;display:flex;align-items:center;gap:6px;white-space:nowrap;transition:all 0.15s;text-decoration:none}
+.store-btn:hover{border-color:#25D366;color:#25D366}
+
+.filters-row{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.tab{padding:7px 16px;border-radius:20px;font-size:13px;font-weight:500;cursor:pointer;border:1.5px solid #ddd;background:#fff;color:#555;transition:all 0.15s;white-space:nowrap}
+.tab:hover{border-color:#25D366;color:#25D366}
+.tab.active{background:#25D366;border-color:#25D366;color:#fff}
+.adult-toggle{display:flex;align-items:center;gap:6px;margin-left:auto;font-size:12px;color:#888;cursor:pointer;user-select:none}
+.adult-toggle input{accent-color:#e24b4a;width:14px;height:14px}
+
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.section-title{font-size:15px;font-weight:700;color:#222}
+.section-count{font-size:12px;color:#999;background:#e8e8e8;padding:2px 8px;border-radius:10px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px}
+
+.sound-card{background:#fff;border:1.5px solid #e0e0e0;border-radius:12px;overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s}
+.sound-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.1);border-color:#c8c8c8}
+.sound-card.playing{border-color:#25D366;box-shadow:0 4px 16px rgba(37,211,102,0.2)}
+
+.play-area{width:100%;padding:14px 14px 10px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+.play-area:active .play-btn{transform:scale(0.96)}
+.play-btn{width:54px;height:54px;border-radius:50%;background:#25D366;display:flex;align-items:center;justify-content:center;transition:transform 0.1s,background 0.15s;flex-shrink:0}
+.play-btn.stop-mode{background:#e24b4a}
+.play-btn i{color:#fff;font-size:22px}
+.sound-title{font-size:12px;font-weight:500;color:#333;text-align:center;line-height:1.4;min-height:34px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.progress-wrap{width:100%;height:3px;background:#eee;border-radius:2px;overflow:hidden;display:none}
+.progress-fill{height:100%;background:#25D366;width:0%;transition:width 0.1s linear}
+.sound-card.playing .progress-wrap{display:block}
+.badge-row{display:flex;gap:4px;flex-wrap:wrap;justify-content:center}
+.badge{font-size:9px;padding:2px 6px;border-radius:8px;font-weight:700;letter-spacing:0.03em}
+.badge-novo{background:#e1f5ee;color:#0f6e56}
+.badge-adult{background:#fff0f0;color:#c0392b}
+
+.card-footer{border-top:1px solid #f0f0f0;display:flex;align-items:center}
+.footer-link{flex:1;padding:8px 10px;font-size:11px;font-weight:600;color:#128C7E;text-decoration:none;display:flex;align-items:center;gap:4px;transition:background 0.1s;border-right:1px solid #f0f0f0;cursor:pointer;border:none;background:transparent}
+.footer-link:hover{background:#f5fdf8}
+.footer-sep{width:1px;height:100%;background:#f0f0f0}
+.footer-btn{width:36px;padding:8px 0;display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;background:transparent;transition:background 0.1s;border-left:1px solid #f0f0f0}
+.footer-btn:hover{background:#f5f5f5}
+.footer-btn i{font-size:15px;color:#888}
+.footer-btn.fav-on i{color:#e24b4a}
+
+.ad-inline{background:#fff;border:1px dashed #ddd;border-radius:10px;padding:12px;text-align:center;color:#bbb;font-size:12px;display:flex;align-items:center;justify-content:center;gap:8px;min-height:80px;grid-column:1/-1;margin:4px 0}
+
+/* LOADING */
+.loading{padding:60px;text-align:center;color:#aaa;grid-column:1/-1}
+.loading i{font-size:36px;display:block;margin-bottom:12px;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{padding:40px;text-align:center;color:#bbb;grid-column:1/-1}
+.empty i{font-size:48px;display:block;margin-bottom:12px}
+
+/* DETAIL VIEW */
+.page-detail{display:none;max-width:700px;margin:0 auto;padding:16px 16px 80px}
+.back-btn{display:flex;align-items:center;gap:6px;font-size:13px;color:#128C7E;cursor:pointer;margin-bottom:16px;font-weight:500;background:none;border:none;padding:0}
+.back-btn:hover{opacity:0.75}
+.detail-card{background:#fff;border:1.5px solid #e0e0e0;border-radius:16px;overflow:hidden}
+.detail-img{width:100%;height:220px;object-fit:cover;display:block}
+.detail-img-fallback{width:100%;height:220px;background:linear-gradient(135deg,#25D366,#128C7E);display:none;align-items:center;justify-content:center;font-size:64px}
+.detail-body{padding:20px}
+.detail-title{font-size:18px;font-weight:700;color:#111;margin-bottom:4px;line-height:1.3}
+.detail-meta{font-size:12px;color:#999;margin-bottom:20px}
+.detail-play-btn{width:100%;padding:14px;border-radius:10px;background:#25D366;border:none;cursor:pointer;font-size:15px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:12px;transition:background 0.15s}
+.detail-play-btn:hover{background:#20c45a}
+.detail-play-btn.stop{background:#e24b4a}
+.detail-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.action-btn{padding:11px;border-radius:10px;border:1.5px solid #ddd;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:#333;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.15s}
+.action-btn:hover{border-color:#25D366;color:#25D366}
+.action-btn.fav-on{border-color:#e24b4a;color:#e24b4a;background:#fff5f5}
+.detail-progress{width:100%;height:5px;background:#eee;border-radius:3px;overflow:hidden;margin-bottom:20px;display:none}
+.detail-progress-fill{height:100%;background:#25D366;width:0%;transition:width 0.1s linear}
+.detail-ad{background:#f9f9f9;border:1px dashed #ddd;border-radius:10px;padding:20px;text-align:center;color:#bbb;font-size:12px}
+
+.np-bar{position:fixed;bottom:0;left:0;right:0;background:#128C7E;padding:10px 20px;display:none;align-items:center;gap:12px;z-index:200;box-shadow:0 -4px 20px rgba(0,0,0,0.15)}
+.np-bar.on{display:flex}
+.np-dot{width:8px;height:8px;background:#fff;border-radius:50%;flex-shrink:0;animation:blink 1s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.np-info{flex:1;min-width:0}
+.np-label{font-size:10px;color:rgba(255,255,255,0.7);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+.np-title{font-size:13px;color:#fff;font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.np-stop{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.np-stop i{color:#fff;font-size:16px}
+.np-stop:hover{background:rgba(255,255,255,0.3)}
+
+@media(max-width:640px){
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .header-search,.store-btns{display:none}
+  .ad-slot{height:60px}
+  .adult-toggle{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo" onclick="showHome()">
+    <div class="logo-icon"><i class="ti ti-brand-whatsapp" style="color:#fff;font-size:20px"></i></div>
+    <h1>Áudios Whats</h1>
+  </div>
+  <div class="header-spacer"></div>
+  <input class="header-search" type="text" placeholder="Buscar áudios..." oninput="onSearch(this.value)" id="header-search">
+  <div class="header-nav">
+    <button class="nav-btn active" onclick="filterTab('todos',this)">Todos</button>
+    <button class="nav-btn" onclick="filterTab('novosAudios',this)">🔥 Novos</button>
+    <button class="nav-btn" onclick="filterTab('favoritos',this)">❤️ Favoritos</button>
+  </div>
+</div>
+
+<div class="ad-wrap">
+  <div class="ad-label">Publicidade</div>
+  <div class="ad-slot"><i class="ti ti-ad" style="font-size:20px"></i> Google AdSense — 728×90</div>
+</div>
+
+<!-- HOME -->
+<div id="view-home">
+  <div class="page">
+    <div class="app-bar">
+      <i class="ti ti-device-mobile-vibration" style="font-size:36px;color:#25D366"></i>
+      <div class="app-bar-text">
+        <strong>Baixe o app gratuito!</strong>
+        <span>+500 áudios engraçados no seu celular</span>
+      </div>
+      <div class="store-btns">
+        <a class="store-btn" href="#"><i class="ti ti-brand-apple" style="font-size:15px"></i> App Store</a>
+        <a class="store-btn" href="#"><i class="ti ti-brand-google-play" style="font-size:15px"></i> Google Play</a>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="tab active" onclick="filterTab('todos',this)" id="tab-todos">Todos</div>
+      <div class="tab" onclick="filterTab('novosAudios',this)" id="tab-novos">🔥 Novos</div>
+      <div class="tab" onclick="filterTab('favoritos',this)" id="tab-favs">❤️ Favoritos</div>
+      <label class="adult-toggle">
+        <input type="checkbox" id="adult-toggle" onchange="renderGrid()"> Mostrar +18
+      </label>
+    </div>
+
+    <div class="section-header">
+      <span class="section-title" id="section-title">Todos os áudios</span>
+      <span class="section-count" id="audio-count">—</span>
+    </div>
+
+    <div class="grid" id="grid">
+      <div class="loading"><i class="ti ti-loader-2"></i>Carregando áudios...</div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL -->
+<div id="view-detail" style="display:none">
+  <div class="page-detail">
+    <button class="back-btn" onclick="showHome()"><i class="ti ti-arrow-left" style="font-size:16px"></i> Voltar</button>
+    <div class="detail-ad" style="margin-bottom:16px"><i class="ti ti-ad" style="font-size:18px"></i> Anúncio — Google AdSense</div>
+    <div class="detail-card">
+      <img class="detail-img" id="detail-img" src="" alt="" onerror="this.style.display='none';document.getElementById('detail-img-fb').style.display='flex'">
+      <div class="detail-img-fallback" id="detail-img-fb">🎵</div>
+      <div class="detail-body">
+        <div id="detail-badges" style="margin-bottom:8px"></div>
+        <div class="detail-title" id="detail-title"></div>
+        <div class="detail-meta" id="detail-meta">Áudios engraçados para WhatsApp</div>
+        <div class="detail-progress" id="detail-progress"><div class="detail-progress-fill" id="detail-pf"></div></div>
+        <button class="detail-play-btn" id="detail-play-btn" onclick="toggleDetailPlay()">
+          <i class="ti ti-player-play" id="detail-play-icon"></i>
+          <span id="detail-play-label">Tocar áudio</span>
+        </button>
+        <div class="detail-actions">
+          <button class="action-btn" id="detail-fav-btn" onclick="toggleDetailFav()">
+            <i class="ti ti-heart" id="detail-fav-icon"></i> <span id="detail-fav-label">Favoritar</span>
+          </button>
+          <button class="action-btn" onclick="shareDetail()"><i class="ti ti-share"></i> Compartilhar</button>
+          <button class="action-btn" onclick="downloadDetail()"><i class="ti ti-download"></i> Baixar MP3</button>
+          <button class="action-btn" onclick="copyDetail()"><i class="ti ti-copy"></i> Copiar link</button>
+        </div>
+      </div>
+    </div>
+    <div class="detail-ad" style="margin-top:16px"><i class="ti ti-ad" style="font-size:18px"></i> Anúncio — Google AdSense</div>
+  </div>
+</div>
+
+<!-- NOW PLAYING -->
+<div class="np-bar" id="np-bar">
+  <div class="np-dot"></div>
+  <div class="np-info">
+    <div class="np-label">Tocando agora</div>
+    <div class="np-title" id="np-title">—</div>
+  </div>
+  <button class="np-stop" onclick="stopAudio()" title="Parar"><i class="ti ti-player-stop"></i></button>
+</div>
+
+<script>
+const FIREBASE_URL = 'https://audioswhats-da1f3.firebaseio.com/audios.json';
+let allAudios = [];
+let currentAudio = null;
+let currentIndex = -1;
+let progressInterval = null;
+let currentFilter = 'todos';
+let searchQuery = '';
+let detailIndex = -1;
+
+function getFavs(){try{return JSON.parse(localStorage.getItem('aw_favs')||'[]')}catch{return[]}}
+function saveFavs(f){try{localStorage.setItem('aw_favs',JSON.stringify(f))}catch{}}
+function showAdult(){return document.getElementById('adult-toggle')?.checked||false}
+
+// ===== LOAD FROM FIREBASE =====
+async function loadAudios(){
+  try{
+    const res = await fetch(FIREBASE_URL);
+    if(!res.ok)throw new Error('HTTP '+res.status);
+    const data = await res.json();
+    allAudios = Array.isArray(data) ? data : Object.values(data);
+    renderGrid();
+  }catch(e){
+    document.getElementById('grid').innerHTML='<div class="empty"><i class="ti ti-wifi-off"></i>Erro ao carregar áudios.<br><small>'+e.message+'</small></div>';
+  }
+}
+
+// ===== FILTER =====
+function getFiltered(){
+  const adult = showAdult();
+  let list = allAudios.filter(a => adult || !a.isAdultOnly);
+  if(currentFilter==='favoritos'){
+    const favs=getFavs();
+    list=list.filter((_,i)=>favs.includes(allAudios.indexOf(_)));
+  } else if(currentFilter!=='todos'){
+    list=list.filter(a=>a.categorias&&a.categorias.includes(currentFilter));
+  }
+  if(searchQuery){
+    const q=searchQuery.toLowerCase();
+    list=list.filter(a=>a.frase&&a.frase.toLowerCase().includes(q));
+  }
+  return list;
+}
+
+// ===== RENDER GRID =====
+function renderGrid(){
+  if(!allAudios.length){
+    document.getElementById('grid').innerHTML='<div class="loading"><i class="ti ti-loader-2"></i>Carregando...</div>';
+    return;
+  }
+  const filtered=getFiltered();
+  const favs=getFavs();
+  document.getElementById('audio-count').textContent=filtered.length+' áudios';
+  const titles={todos:'Todos os áudios',novosAudios:'Novos áudios',favoritos:'Meus favoritos'};
+  document.getElementById('section-title').textContent=searchQuery?'Resultados para "'+searchQuery+'"':(titles[currentFilter]||'Áudios');
+
+  // update fav tab label
+  const ft=document.getElementById('tab-favs');
+  if(ft)ft.textContent='❤️ Favoritos'+(favs.length?` (${favs.length})`:'');
+
+  if(!filtered.length){
+    document.getElementById('grid').innerHTML='<div class="empty"><i class="ti ti-mood-sad"></i>Nenhum áudio encontrado</div>';
+    return;
+  }
+
+  let html='';
+  filtered.forEach((a,localI)=>{
+    const idx=allAudios.indexOf(a);
+    const isFav=favs.includes(idx);
+    const isPlay=currentIndex===idx;
+    if(localI>0&&localI%12===0){
+      html+=`<div class="ad-inline"><i class="ti ti-ad" style="font-size:18px"></i>&nbsp; Anúncio Google AdSense</div>`;
+    }
+    const badges=(a.isNovo?'<span class="badge badge-novo">NOVO</span>':'')+(a.isAdultOnly?'<span class="badge badge-adult">+18</span>':'');
+    html+=`<div class="sound-card${isPlay?' playing':''}" id="card-${idx}">
+      <div class="play-area" onclick="togglePlay(${idx})">
+        <div class="play-btn${isPlay?' stop-mode':''}" id="playbtn-${idx}">
+          <i class="ti ${isPlay?'ti-player-stop':'ti-player-play'}" id="playicon-${idx}"></i>
+        </div>
+        ${badges?'<div class="badge-row">'+badges+'</div>':''}
+        <div class="sound-title">${a.frase||a.pathAudio}</div>
+        <div class="progress-wrap" id="pw-${idx}"><div class="progress-fill" id="pf-${idx}"></div></div>
+      </div>
+      <div class="card-footer">
+        <button class="footer-link" onclick="openDetail(${idx})">
+          <i class="ti ti-external-link" style="font-size:12px"></i> Ver mais
+        </button>
+        <button class="footer-btn${isFav?' fav-on':''}" id="favbtn-${idx}" onclick="toggleFav(${idx})" title="Favoritar">
+          <i class="ti ${isFav?'ti-heart-filled':'ti-heart'}"></i>
+        </button>
+        <button class="footer-btn" onclick="shareAudio(${idx})" title="Compartilhar">
+          <i class="ti ti-share"></i>
+        </button>
+      </div>
+    </div>`;
+  });
+  document.getElementById('grid').innerHTML=html;
+}
+
+// ===== PLAY =====
+function togglePlay(idx){
+  if(currentIndex===idx){stopAudio();return;}
+  if(currentAudio){stopAudio();}
+  currentIndex=idx;
+  currentAudio=new Audio(allAudios[idx].audio);
+  currentAudio.play().catch(()=>{});
+  updateCardUI(idx,true);
+  document.getElementById('np-title').textContent=allAudios[idx].frase;
+  document.getElementById('np-bar').classList.add('on');
+  progressInterval=setInterval(()=>{
+    if(!currentAudio||!currentAudio.duration)return;
+    const pct=(currentAudio.currentTime/currentAudio.duration)*100;
+    const pf=document.getElementById('pf-'+idx);
+    if(pf)pf.style.width=pct+'%';
+    if(detailIndex===idx)document.getElementById('detail-pf').style.width=pct+'%';
+  },150);
+  currentAudio.onended=()=>stopAudio();
+}
+
+function stopAudio(){
+  if(currentAudio){currentAudio.pause();currentAudio=null;}
+  clearInterval(progressInterval);
+  if(currentIndex>=0){
+    updateCardUI(currentIndex,false);
+    const pf=document.getElementById('pf-'+currentIndex);
+    if(pf)pf.style.width='0%';
+    if(detailIndex===currentIndex)resetDetailPlayBtn();
+  }
+  currentIndex=-1;
+  document.getElementById('np-bar').classList.remove('on');
+}
+
+function updateCardUI(idx,playing){
+  const card=document.getElementById('card-'+idx);
+  const btn=document.getElementById('playbtn-'+idx);
+  const icon=document.getElementById('playicon-'+idx);
+  const pw=document.getElementById('pw-'+idx);
+  if(card)card.classList.toggle('playing',playing);
+  if(btn)btn.className='play-btn'+(playing?' stop-mode':'');
+  if(icon)icon.className='ti '+(playing?'ti-player-stop':'ti-player-play');
+  if(pw)pw.style.display=playing?'block':'none';
+  if(detailIndex===idx){
+    document.getElementById('detail-play-btn').className='detail-play-btn'+(playing?' stop':'');
+    document.getElementById('detail-play-icon').className='ti '+(playing?'ti-player-stop':'ti-player-play');
+    document.getElementById('detail-play-label').textContent=playing?'Parar':'Tocar áudio';
+    document.getElementById('detail-progress').style.display=playing?'block':'none';
+  }
+}
+
+function resetDetailPlayBtn(){
+  document.getElementById('detail-play-btn').className='detail-play-btn';
+  document.getElementById('detail-play-icon').className='ti ti-player-play';
+  document.getElementById('detail-play-label').textContent='Tocar áudio';
+  document.getElementById('detail-progress').style.display='none';
+  document.getElementById('detail-pf').style.width='0%';
+}
+
+// ===== FAV =====
+function toggleFav(idx){
+  const favs=getFavs();
+  const i=favs.indexOf(idx);
+  if(i>-1)favs.splice(i,1);else favs.push(idx);
+  saveFavs(favs);
+  renderGrid();
+  if(detailIndex===idx)renderDetailFav();
+}
+
+// ===== SHARE / DOWNLOAD =====
+function shareAudio(idx){
+  const a=allAudios[idx];
+  if(navigator.share)navigator.share({title:a.frase,text:a.frase+' — Áudios Whats',url:a.audio}).catch(()=>{});
+  else navigator.clipboard.writeText(a.audio).then(()=>showToast('Link copiado!')).catch(()=>{});
+}
+
+function showToast(msg){
+  const t=document.createElement('div');
+  t.textContent=msg;
+  Object.assign(t.style,{position:'fixed',bottom:'70px',left:'50%',transform:'translateX(-50%)',background:'#333',color:'#fff',padding:'8px 18px',borderRadius:'20px',fontSize:'13px',zIndex:999,opacity:1,transition:'opacity 0.4s'});
+  document.body.appendChild(t);
+  setTimeout(()=>{t.style.opacity=0;setTimeout(()=>t.remove(),400)},2000);
+}
+
+// ===== SEARCH =====
+function onSearch(val){searchQuery=val.trim();renderGrid();}
+
+// ===== TABS =====
+function filterTab(filter,el){
+  currentFilter=filter;
+  searchQuery='';
+  document.getElementById('header-search').value='';
+  document.querySelectorAll('.nav-btn,.tab').forEach(b=>b.classList.remove('active'));
+  if(el)el.classList.add('active');
+  renderGrid();
+}
+
+// ===== VIEWS =====
+function showHome(){
+  document.getElementById('view-home').style.display='block';
+  document.getElementById('view-detail').style.display='none';
+  renderGrid();
+  window.scrollTo(0,0);
+}
+
+function openDetail(idx){
+  detailIndex=idx;
+  const a=allAudios[idx];
+  if(currentIndex>=0&&currentIndex!==idx)stopAudio();
+  const img=document.getElementById('detail-img');
+  const imgFb=document.getElementById('detail-img-fb');
+  img.src=a.imagem||'';img.style.display='block';imgFb.style.display='none';
+  document.getElementById('detail-title').textContent=a.frase||a.pathAudio;
+  document.getElementById('detail-meta').textContent=a.personagem?'Personagem: '+a.personagem:'Áudios engraçados para WhatsApp';
+  const badges=(a.isNovo?'<span class="badge badge-novo" style="margin-right:4px">NOVO</span>':'')+(a.isAdultOnly?'<span class="badge badge-adult">+18</span>':'');
+  document.getElementById('detail-badges').innerHTML=badges;
+  const isPlay=currentIndex===idx;
+  document.getElementById('detail-play-btn').className='detail-play-btn'+(isPlay?' stop':'');
+  document.getElementById('detail-play-icon').className='ti '+(isPlay?'ti-player-stop':'ti-player-play');
+  document.getElementById('detail-play-label').textContent=isPlay?'Parar':'Tocar áudio';
+  document.getElementById('detail-progress').style.display=isPlay?'block':'none';
+  renderDetailFav();
+  document.getElementById('view-home').style.display='none';
+  document.getElementById('view-detail').style.display='block';
+  window.scrollTo(0,0);
+}
+
+function renderDetailFav(){
+  const isFav=getFavs().includes(detailIndex);
+  document.getElementById('detail-fav-btn').className='action-btn'+(isFav?' fav-on':'');
+  document.getElementById('detail-fav-icon').className='ti '+(isFav?'ti-heart-filled':'ti-heart');
+  document.getElementById('detail-fav-label').textContent=isFav?'Favoritado':'Favoritar';
+}
+
+function toggleDetailPlay(){togglePlay(detailIndex);}
+function toggleDetailFav(){toggleFav(detailIndex);}
+function shareDetail(){shareAudio(detailIndex);}
+function copyDetail(){navigator.clipboard.writeText(allAudios[detailIndex].audio).then(()=>showToast('Link copiado!')).catch(()=>{});}
+function downloadDetail(){
+  const a=allAudios[detailIndex];
+  const link=document.createElement('a');
+  link.href=a.audio;link.download=(a.pathAudio||'audio')+'.mp3';link.target='_blank';link.click();
+}
+
+// ===== INIT =====
+loadAudios();
+</script>
+</body>
+</html>
