@@ -253,28 +253,26 @@ function cardHTML(a, idx){
   const favs = getFavs();
   const isFav = favs.includes(idx);
   const isPlay = currentIndex === idx;
-  return `<div class="card${isPlay?' playing':''}" id="card-${idx}">
-    <div class="card-img-wrap" onclick="openDetail(${idx})">
-      <img class="card-img" src="${a.imagem||''}" alt="${a.frase||''}"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-      <div class="card-img-fallback">🎵</div>
-      ${a.isNovo?`<img src="${IMG_NEW}" style="position:absolute;top:4px;left:4px;width:36px;height:36px;object-fit:contain" alt="new">`:''}`
-      ${a.isAdultOnly?`<img src="${IMG_ADULT}" style="position:absolute;top:4px;right:4px;width:36px;height:36px;object-fit:contain" alt="+18">`:''}`
-    </div>
-    <div class="card-progress" id="cpb-${idx}"><div class="card-progress-fill" id="cpf-${idx}"></div></div>
-    <div class="card-title" onclick="openDetail(${idx})">${a.frase||a.pathAudio}</div>
-    <div class="card-actions">
-      <button class="cbtn cbtn-play" id="playbtn-${idx}" onclick="togglePlay(${idx})" title="Tocar">
-        <img id="playicon-${idx}" src="${isPlay?IMG_STOP:IMG_PLAY}" style="width:32px;height:32px;border-radius:50%;display:block">
-      </button>
-      <button class="cbtn cbtn-whats" onclick="shareWhats(${idx})" title="Compartilhar no WhatsApp">
-        <img src="${IMG_WHATS}" style="width:32px;height:32px;border-radius:50%;display:block">
-      </button>
-      <button class="cbtn cbtn-fav${isFav?' on':''}" id="favbtn-${idx}" onclick="toggleFav(${idx})" title="Favoritar">
-        <i class="ti ${isFav?'ti-star-filled':'ti-star'}"></i>
-      </button>
-    </div>
-  </div>`;
+  const badgeNew = a.isNovo ? '<img src="'+IMG_NEW+'" style="position:absolute;top:4px;left:4px;width:36px;height:36px;object-fit:contain" alt="new">' : '';
+  const badgeAdult = a.isAdultOnly ? '<img src="'+IMG_ADULT+'" style="position:absolute;top:4px;right:4px;width:36px;height:36px;object-fit:contain" alt="+18">' : '';
+  const playIcon = '<img id="playicon-'+idx+'" src="'+(isPlay?IMG_STOP:IMG_PLAY)+'" style="width:32px;height:32px;border-radius:50%;display:block">';
+  const whatsIcon = '<img src="'+IMG_WHATS+'" style="width:32px;height:32px;border-radius:50%;display:block">';
+  return '<div class="card'+(isPlay?' playing':'')+'" id="card-'+idx+'">'
+    + '<div class="card-img-wrap" onclick="openDetail('+idx+')">'
+    + '<img class="card-img" src="'+(a.imagem||'')+'" alt="'+(a.frase||'')+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+    + '<div class="card-img-fallback">🎵</div>'
+    + badgeNew + badgeAdult
+    + '</div>'
+    + '<div class="card-progress" id="cpb-'+idx+'"><div class="card-progress-fill" id="cpf-'+idx+'"></div></div>'
+    + '<div class="card-title" onclick="openDetail('+idx+')">'+(a.frase||a.pathAudio)+'</div>'
+    + '<div class="card-actions">'
+    + '<button class="cbtn cbtn-play" id="playbtn-'+idx+'" onclick="togglePlay('+idx+')" title="Tocar">'+playIcon+'</button>'
+    + '<button class="cbtn cbtn-whats" onclick="shareWhats('+idx+')" title="Compartilhar no WhatsApp">'+whatsIcon+'</button>'
+    + '<button class="cbtn cbtn-fav'+(isFav?' on':'')+'" id="favbtn-'+idx+'" onclick="toggleFav('+idx+')" title="Favoritar">'
+    + '<i class="ti '+(isFav?'ti-star-filled':'ti-star')+'"></i>'
+    + '</button>'
+    + '</div>'
+    + '</div>';
 }
 
 // ===== RENDER =====
@@ -495,8 +493,8 @@ function openDetail(idx){
   document.getElementById('detail-img-fb').style.display='none';
   document.getElementById('detail-title').textContent=a.frase||a.pathAudio;
   document.getElementById('detail-meta').textContent=a.personagem?'Personagem: '+a.personagem:'Áudios engraçados para WhatsApp';
-  const b=(a.isNovo?`<img src="${IMG_NEW}" style="width:40px;height:40px;object-fit:contain" alt="new">`:'')+
-          (a.isAdultOnly?`<img src="${IMG_ADULT}" style="width:40px;height:40px;object-fit:contain" alt="+18">`:'');
+  const b=(a.isNovo?'<img src="'+IMG_NEW+'" style="width:40px;height:40px;object-fit:contain" alt="new">':'')+
+          (a.isAdultOnly?'<img src="'+IMG_ADULT+'" style="width:40px;height:40px;object-fit:contain" alt="+18">':'');
   document.getElementById('detail-badges').innerHTML=b;
   const isPlay=currentIndex===idx;
   document.getElementById('detail-play-btn').className='detail-play-btn'+(isPlay?' stop':'');
