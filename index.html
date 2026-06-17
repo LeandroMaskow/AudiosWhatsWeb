@@ -253,7 +253,7 @@ function cardHTML(a, idx){
   const favs = getFavs();
   const isFav = favs.includes(idx);
   const isPlay = currentIndex === idx;
-  const badgeNew = a.isNovo ? '<img src="'+IMG_NEW+'" style="position:absolute;top:4px;left:4px;width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))" alt="new">' : '';
+  const badgeNew = a.isNovo ? '<img src="'+IMG_NEW+'" style="position:absolute;top:4px;left:4px;width:23px;height:23px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))" alt="new">' : '';
   const badgeAdult = a.isAdultOnly ? '<img src="'+IMG_ADULT+'" style="position:absolute;top:4px;right:4px;width:36px;height:36px;object-fit:contain" alt="+18">' : '';
   const playIcon = '<img id="playicon-'+idx+'" src="'+( isPlay?IMG_STOP:IMG_PLAY )+'" style="width:32px;height:32px;display:block">';
   const whatsIcon = '<img src="'+IMG_WHATS+'" style="width:32px;height:32px;display:block">';
