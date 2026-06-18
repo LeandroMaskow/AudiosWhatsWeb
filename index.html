@@ -138,6 +138,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
 /* TOAST */
 .toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;z-index:999;pointer-events:none;transition:opacity 0.4s}
 </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4243316377123541" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -253,8 +254,8 @@ function cardHTML(a, idx){
   const favs = getFavs();
   const isFav = favs.includes(idx);
   const isPlay = currentIndex === idx;
-  const badgeNew = a.isNovo ? '<img src="'+IMG_NEW+'" style="position:absolute;top:4px;left:4px;width:20px;height:20px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))" alt="new">' : '';
-  const badgeAdult = a.isAdultOnly ? '<img src="'+IMG_ADULT+'" style="position:absolute;top:4px;right:4px;width:20px;height:20px;object-fit:contain" alt="+18">' : '';
+  const badgeNew = a.isNovo ? '<img src="'+IMG_NEW+'" style="position:absolute;top:4px;left:4px;width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))" alt="new">' : '';
+  const badgeAdult = a.isAdultOnly ? '<img src="'+IMG_ADULT+'" style="position:absolute;top:4px;right:4px;width:23px;height:23px;object-fit:contain" alt="+18">' : '';
   const playIcon = '<img id="playicon-'+idx+'" src="'+( isPlay?IMG_STOP:IMG_PLAY )+'" style="width:32px;height:32px;display:block">';
   const whatsIcon = '<img src="'+IMG_WHATS+'" style="width:32px;height:32px;display:block">';
   return '<div class="card'+(isPlay?' playing':'')+'" id="card-'+idx+'">'
@@ -311,6 +312,9 @@ function renderHome(){
       </a>
       <a class="store-btn" href="https://play.google.com/store/apps/details?id=audiowhats.maskow.org.audiowhats" target="_blank" rel="noopener">
         <i class="ti ti-brand-google-play" style="font-size:13px"></i> Google Play
+      </a>
+      <a class="store-btn" href="https://chat.whatsapp.com/IN5LTTgbHJv5U1OYNsgMsR?s=cl&p=i&ilr=2&amv=2" target="_blank" rel="noopener">
+        <i class="ti ti-brand-whatsapp" style="font-size:13px"></i> Grupo do WhatsApp
       </a>
     </div>
   </div>`;
