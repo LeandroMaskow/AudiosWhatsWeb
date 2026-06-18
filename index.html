@@ -163,10 +163,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
   </div>
 </div>
 
-<!-- AD BANNER -->
-<div class="ad-banner">
-  <div class="ad-label">Publicidade</div>
-  <div class="ad-slot"><i class="ti ti-ad" style="font-size:18px"></i> Google AdSense — 728×90</div>
+<div class="ad-slot"><i class="ti ti-ad" style="font-size:18px"></i> Google AdSense — 728×90</div>
 </div>
 
 <!-- HOME VIEW -->
@@ -180,7 +177,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
 <div id="view-detail" style="display:none">
   <div class="page-detail">
     <button class="back-btn" onclick="showHome()"><i class="ti ti-arrow-left" style="font-size:16px"></i> Voltar</button>
-    <div class="detail-ad" style="margin-bottom:14px"><i class="ti ti-ad"></i> Anúncio — Google AdSense</div>
+    
     <div class="detail-card">
       <img class="detail-img" id="detail-img" src="" alt="" onerror="this.style.display='none';document.getElementById('detail-img-fb').style.display='flex'">
       <div class="detail-img-fallback" id="detail-img-fb">🎵</div>
@@ -203,7 +200,7 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
         </div>
       </div>
     </div>
-    <div class="detail-ad" style="margin-top:14px"><i class="ti ti-ad"></i> Anúncio — Google AdSense</div>
+    
   </div>
 </div>
 
@@ -279,7 +276,7 @@ function cardHTML(a, idx){
 // ===== RENDER =====
 function getFiltered(){
   const showAdult = document.getElementById('adult-toggle')?.checked || false;
-  let list = allAudios.filter(a => showAdult || !a.isAdultOnly);
+  let list = allAudios.filter(a => (showAdult || !a.isAdultOnly) && (!a.personagem || a.personagem === ''));
   if(currentTab === 'novos') list = list.filter(a => a.isNovo);
   else if(currentTab === 'favs'){const f=getFavs(); list = allAudios.filter((_,i)=>f.includes(i));}
   if(searchQuery){const q=searchQuery.toLowerCase(); list=list.filter(a=>a.frase&&a.frase.toLowerCase().includes(q));}
@@ -295,8 +292,9 @@ function renderContent(){
 }
 
 function renderHome(){
-  const novos = allAudios.filter(a=>a.isNovo).slice(0,12);
-  const todos = allAudios.slice(0,12);
+  const semPersonagem = allAudios.filter(a => !a.personagem || a.personagem === '');
+  const novos = semPersonagem.filter(a=>a.isNovo).slice(0,12);
+  const todos = semPersonagem.slice(0,12);
   const favIdxs = getFavs();
   const favs = allAudios.filter((_,i)=>favIdxs.includes(i)).slice(0,12);
 
@@ -337,10 +335,6 @@ function renderHome(){
     <div class="h-scroll">${todos.map(a=>cardHTML(a,allAudios.indexOf(a))).join('')}</div>
   </div>`;
 
-  html += `<div style="background:#fff;border:1px dashed #ddd;border-radius:10px;padding:14px;text-align:center;color:#ccc;font-size:12px;margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:8px;min-height:70px">
-    <i class="ti ti-ad" style="font-size:18px"></i> Anúncio Google AdSense
-  </div>`;
-
   if(favs.length){
     html += `<div class="section">
       <div class="section-header">
@@ -367,7 +361,7 @@ function renderGrid(){
   filtered.forEach((a,li)=>{
     const idx = allAudios.indexOf(a);
     if(li>0 && li%12===0){
-      html += `</div><div style="background:#fff;border:1px dashed #ddd;border-radius:10px;padding:14px;text-align:center;color:#ccc;font-size:12px;margin:8px 0;display:flex;align-items:center;justify-content:center;gap:8px;min-height:70px"><i class="ti ti-ad" style="font-size:18px"></i> Anúncio Google AdSense</div><div class="grid">`;
+      
     }
     html += cardHTML(a, idx);
   });
@@ -494,7 +488,7 @@ function openDetail(idx){
   img.src=a.imagem||'';img.style.display='block';
   document.getElementById('detail-img-fb').style.display='none';
   document.getElementById('detail-title').textContent=a.frase||a.pathAudio;
-  document.getElementById('detail-meta').textContent=a.personagem?'Personagem: '+a.personagem:'Áudios engraçados para WhatsApp';
+  document.getElementById('detail-meta').textContent='Áudios engraçados para WhatsApp';
   const b=(a.isNovo?`<img src="${IMG_NEW}" style="width:40px;height:40px;object-fit:contain;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.5))" alt="new">`:'')+
           (a.isAdultOnly?`<img src="${IMG_ADULT}" style="width:40px;height:40px;object-fit:contain" alt="+18">`:'');
   document.getElementById('detail-badges').innerHTML=b;
