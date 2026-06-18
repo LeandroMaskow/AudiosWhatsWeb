@@ -275,8 +275,7 @@ function cardHTML(a, idx){
 
 // ===== RENDER =====
 function getFiltered(){
-  const showAdult = document.getElementById('adult-toggle')?.checked || false;
-  let list = allAudios.filter(a => (showAdult || !a.isAdultOnly) && (!a.personagem || a.personagem === ''));
+  let list = allAudios.filter(a => !a.isAdultOnly && (!a.personagem || a.personagem === ''));
   if(currentTab === 'novos') list = list.filter(a => a.isNovo);
   else if(currentTab === 'favs'){const f=getFavs(); list = allAudios.filter((_,i)=>f.includes(i));}
   if(searchQuery){const q=searchQuery.toLowerCase(); list=list.filter(a=>a.frase&&a.frase.toLowerCase().includes(q));}
@@ -292,7 +291,7 @@ function renderContent(){
 }
 
 function renderHome(){
-  const semPersonagem = allAudios.filter(a => !a.personagem || a.personagem === '');
+  const semPersonagem = allAudios.filter(a => !a.isAdultOnly && (!a.personagem || a.personagem === ''));
   const novos = semPersonagem.filter(a=>a.isNovo).slice(0,12);
   const todos = semPersonagem.slice(0,12);
   const favIdxs = getFavs();
