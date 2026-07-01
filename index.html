@@ -378,10 +378,10 @@ function renderContent(){
 
 function renderHome(){
   const semPersonagem = allAudios.filter(a => !a.isAdultOnly && (!a.personagem || a.personagem === ''));
-  const novos = semPersonagem.filter(a=>a.isNovo).slice(0,12);
-  const todos = semPersonagem.slice(0,12);
+  const novos = semPersonagem.filter(a=>a.isNovo).slice(0,20);
+  const todos = semPersonagem.slice(0,20);
   const favIdxs = getFavs();
-  const favs = allAudios.filter((_,i)=>favIdxs.includes(i)).slice(0,12);
+  const favs = allAudios.filter((_,i)=>favIdxs.includes(i)).slice(0,20);
 
   let html = `<div class="app-bar">
     <i class="ti ti-device-mobile-vibration" style="font-size:30px;color:var(--green)"></i>
