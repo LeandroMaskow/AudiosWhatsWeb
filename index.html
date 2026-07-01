@@ -137,6 +137,62 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
 
 /* TOAST */
 .toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;z-index:999;pointer-events:none;transition:opacity 0.4s}
+
+/* SESSION */
+.info-section{
+    background:#fff;
+    border-radius:12px;
+    padding:24px;
+    margin:26px 0;
+    border:1px solid #e5e5e5;
+}
+
+.info-section h2{
+    color:var(--green);
+    margin-bottom:16px;
+    font-size:24px;
+}
+
+.info-section h3{
+    margin-top:18px;
+    margin-bottom:8px;
+    font-size:17px;
+}
+
+.info-section p{
+    color:#555;
+    line-height:1.8;
+    margin-bottom:14px;
+}
+
+.info-section ul{
+    padding-left:20px;
+}
+
+.info-section li{
+    margin-bottom:10px;
+}
+
+.steps{
+    display:grid;
+    gap:18px;
+}
+
+.category-grid{
+    display:grid;
+    gap:18px;
+}
+
+@media(min-width:700px){
+  .steps{
+  grid-template-columns:repeat(3,1fr);
+  }
+  
+  .category-grid{
+  grid-template-columns:repeat(2,1fr);
+  }
+}
+  
 </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4243316377123541" crossorigin="anonymous"></script>
 </head>
@@ -535,6 +591,51 @@ function toggleDetailFav(){toggleFav(detailIndex);}
 
 loadAudios();
 </script>
+
+<!-- SEÇÕES -->
+<section class="info-section">
+
+<h2>Por que usar o AudiosWhats?</h2>
+
+<ul>
+
+<li>Mais de 2.000 áudios engraçados.</li>
+
+<li>Busca rápida.</li>
+
+<li>Categorias organizadas.</li>
+
+<li>Atualizações frequentes.</li>
+
+<li>Aplicativo leve.</li>
+
+<li>Compartilhamento fácil.</li>
+
+</ul>
+
+</section>
+
+<section class="info-section">
+
+<h2>Perguntas frequentes</h2>
+
+<h3>O aplicativo é gratuito?</h3>
+
+<p>Sim. O AudiosWhats pode ser utilizado gratuitamente.</p>
+
+<h3>Posso compartilhar os áudios?</h3>
+
+<p>Sim. Os áudios podem ser compartilhados facilmente nas redes sociais.</p>
+
+<h3>Preciso criar uma conta?</h3>
+
+<p>Não. Basta acessar o aplicativo e começar a utilizar.</p>
+
+<h3>Novos conteúdos são adicionados?</h3>
+
+<p>Sim. Nossa biblioteca recebe novos áudios regularmente.</p>
+
+</section>
 
 <!-- RODAPÉ -->
 <div style="text-align:center;padding:20px 16px 30px;font-size:12px;color:#aaa">
