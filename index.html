@@ -512,9 +512,36 @@ function toggleFav(idx){
 }
 
 // ===== SHARE =====
-function shareWhats(idx){
+async function shareWhats(idx){
   const a=allAudios[idx];
-  window.open('https://wa.me/?text='+encodeURIComponent(a.frase+'\n'+a.audio),'_blank');
+  showToast('Preparando áudio...');
+  try{
+    const response=await fetch(a.audio);
+    if(!response.ok) throw new Error('Falha ao baixar áudio');
+    const blob=await response.blob();
+    const fileName=(a.pathAudio||'audio').replace(/\.[^/.]+$/,'')+'.mp3';
+    const file=new File([blob],fileName,{type:blob.type||'audio/mpeg'});
+
+    if(navigator.canShare && navigator.canShare({files:[file]})){
+      // Compartilha o arquivo de áudio de verdade (não o link)
+      await navigator.share({files:[file],title:a.frase||'',text:a.frase||''});
+    } else if(navigator.share){
+      // Navegador compartilha, mas não suporta arquivos
+      await navigator.share({title:a.frase||'',text:a.frase||''});
+      showToast('Seu navegador não suporta enviar o arquivo de áudio direto.');
+    } else {
+      // Sem Web Share API: baixa o mp3 para compartilhar manualmente
+      const url=URL.createObjectURL(blob);
+      const link=document.createElement('a');
+      link.href=url;link.download=fileName;link.click();
+      URL.revokeObjectURL(url);
+      showToast('Áudio baixado! Agora é só enviar pelo WhatsApp.');
+    }
+  }catch(e){
+    if(e && e.name==='AbortError')return; // usuário cancelou o compartilhamento
+    console.error(e);
+    showToast('Não foi possível compartilhar o áudio.');
+  }
 }
 function shareWhatsDetail(){shareWhats(detailIndex);}
 function copyDetail(){navigator.clipboard.writeText(allAudios[detailIndex].audio).then(()=>showToast('Link copiado!')).catch(()=>{});}
