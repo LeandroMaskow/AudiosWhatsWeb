@@ -260,8 +260,10 @@ body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:#
     <button class="back-btn" onclick="showHome()"><i class="ti ti-arrow-left" style="font-size:16px"></i> Voltar</button>
     
     <div class="detail-card">
-      <img class="detail-img" id="detail-img" src="" alt="" onerror="this.style.display='none';document.getElementById('detail-img-fb').style.display='flex'">
-      <div class="detail-img-fallback" id="detail-img-fb">🎵</div>
+      <img class="detail-img" id="detail-img" src="" alt=""
+       onclick="toggleDetailPlay()"
+       style="cursor:pointer"
+       onerror="this.style.display='none';document.getElementById('detail-img-fb').style.display='flex'">
       <div class="detail-body">
         <div class="detail-badges" id="detail-badges"></div>
         <div class="detail-title" id="detail-title"></div>
